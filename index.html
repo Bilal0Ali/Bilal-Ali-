@@ -19,65 +19,19 @@
       flex-direction: column;
     }
 
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      cursor: pointer;
-      padding: 1rem;
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 1100;
-    }
-
-    .hamburger div {
-      width: 25px;
-      height: 3px;
-      background-color: #fff;
-      margin: 4px 0;
-      transition: 0.4s;
-    }
-
-    .mobile-nav {
-      display: none;
-      flex-direction: column;
-      position: fixed;
-      top: 0;
-      left: -100%;
-      width: 33%;
-      height: 100vh;
-      background-color: #111;
-      padding-top: 4rem;
-      transition: left 0.3s ease-in-out;
-      z-index: 1000;
-    }
-
-    .mobile-nav a {
-      padding: 1rem;
-      color: #aaa;
-      text-decoration: none;
-      border-bottom: 1px solid #444;
-    }
-
-    .mobile-nav a:hover {
-      color: #fff;
-    }
-
-    .mobile-nav.active {
-      left: 0;
-    }
-
     nav {
       width: 100%;
       display: flex;
       justify-content: center;
-      gap: 1rem;
-      padding: 1rem 2rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      padding: 1rem 1rem;
       position: fixed;
       top: 0;
       left: 0;
       z-index: 900;
       background: #111;
+      box-sizing: border-box;
     }
 
     nav a {
@@ -89,26 +43,12 @@
       border-radius: 999px;
       font-size: 0.9rem;
       transition: all 0.3s ease;
-      position: relative;
+      white-space: nowrap;
     }
 
     nav a:hover {
       color: #fff;
       border-color: #fff;
-    }
-
-    nav a:hover::after {
-      content: attr(data-tooltip);
-      position: absolute;
-      bottom: -1.5rem;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: #222;
-      color: #fff;
-      padding: 2px 6px;
-      font-size: 0.75rem;
-      border-radius: 3px;
-      white-space: wrap;
     }
 
     .main-content {
@@ -119,12 +59,14 @@
       align-items: center;
       padding-top: 5rem;
       flex-wrap: wrap;
+      box-sizing: border-box;
     }
 
     .left {
       flex: 1;
       padding-left: 5vw;
       min-width: 300px;
+      box-sizing: border-box;
     }
 
     .right {
@@ -133,6 +75,7 @@
       justify-content: center;
       align-items: center;
       min-width: 300px;
+      box-sizing: border-box;
     }
 
     .right img {
@@ -212,9 +155,8 @@
     }
 
     .footer {
-      position: absolute;
-      bottom: 10px;
-      left: 10px;
+      margin-top: auto;
+      padding: 1rem;
       font-size: 1.0rem;
       color: #666;
       display: flex;
@@ -236,39 +178,26 @@
       100% { transform: rotate(360deg); }
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 480px) {
       nav {
-        display: none;
+        padding: 0.5rem;
+        justify-content: space-around;
       }
-      .hamburger {
-        display: flex;
-      }
-      .mobile-nav {
-        display: flex;
+
+      nav a {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.8rem;
       }
     }
   </style>
 </head>
 <body>
-  <div class="hamburger" onclick="toggleMenu()">
-    <div></div>
-    <div></div>
-    <div></div>
-  </div>
-
   <nav>
-    <a href="#" data-tooltip="This is where you are">Home</a>
-    <a href="#" data-tooltip="Meet the vibe behind the screen">About</a>
-    <a href="#" data-tooltip="Projects I probably didn’t finish">Projects</a>
-    <a href="#" data-tooltip="Let’s make it awkward">Contact</a>
-  </nav>
-
-  <div class="mobile-nav" id="mobileNav">
     <a href="#">Home</a>
     <a href="#">About</a>
     <a href="#">Projects</a>
     <a href="#">Contact</a>
-  </div>
+  </nav>
 
   <div class="main-content">
     <div class="left">
@@ -286,20 +215,16 @@
     </div>
 
     <div class="right">
-<img src="https://i.postimg.cc/9QMRj9F7/1010.jpg" alt="My Photo">
+      <img src="https://i.postimg.cc/9QMRj9F7/1010.jpg" alt="My Photo">
     </div>
   </div>
 
-  <div class="bottom">
+  <div class="footer">
     <span>Other times, you can find me running in circles as fast as I can.</span>
     <div class="circle"></div>
   </div>
 
   <script>
-    function toggleMenu() {
-      document.getElementById("mobileNav").classList.toggle("active");
-    }
-
     const phrases = [
       "occasionally try to debug inflation.",
       "run regressions on my life choices.",
