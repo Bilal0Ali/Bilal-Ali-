@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bilal's Vibe</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: #111;
+      color: #fff;
+      font-family: 'Courier New', monospace;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      padding: 1rem;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1100;
+    }
+
+    .hamburger div {
+      width: 25px;
+      height: 3px;
+      background-color: #fff;
+      margin: 4px 0;
+      transition: 0.4s;
+    }
+
+    .mobile-nav {
+      display: none;
+      flex-direction: column;
+      position: fixed;
+      top: 0;
+      left: -100%;
+      width: 33%;
+      height: 100vh;
+      background-color: #111;
+      padding-top: 4rem;
+      transition: left 0.3s ease-in-out;
+      z-index: 1000;
+    }
+
+    .mobile-nav a {
+      padding: 1rem;
+      color: #aaa;
+      text-decoration: none;
+      border-bottom: 1px solid #444;
+    }
+
+    .mobile-nav a:hover {
+      color: #fff;
+    }
+
+    .mobile-nav.active {
+      left: 0;
+    }
+
+    nav {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      padding: 1rem 2rem;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 900;
+      background: #111;
+    }
+
+    nav a {
+      padding: 0.6rem 1.2rem;
+      border: 1px solid #666;
+      background: transparent;
+      color: #aaa;
+      text-decoration: none;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    nav a:hover {
+      color: #fff;
+      border-color: #fff;
+    }
+
+    nav a:hover::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: -1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #222;
+      color: #fff;
+      padding: 2px 6px;
+      font-size: 0.75rem;
+      border-radius: 3px;
+      white-space: wrap;
+    }
+
+    .main-content {
+      display: flex;
+      flex: 1;
+      width: 100%;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 5rem;
+      flex-wrap: wrap;
+    }
+
+    .left {
+      flex: 1;
+      padding-left: 5vw;
+      min-width: 300px;
+    }
+
+    .right {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-width: 300px;
+    }
+
+    .right img {
+      max-width: 80%;
+      max-height: 80vh;
+      border-radius: 10px;
+      filter: grayscale(100%);
+      transition: transform 0.5s ease;
+    }
+
+    .right img:hover {
+      transform: scale(1.05);
+    }
+
+    h1, h2 {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1s ease forwards;
+    }
+
+    h2 {
+      animation-delay: 0.3s;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h1 {
+      font-family: 'Inter', sans-serif;
+      font-size: 4.2rem;
+      margin-bottom: 1rem;
+    }
+
+    h2 {
+      font-size: 2.2rem;
+      margin: 0;
+    }
+
+    .typewriter-container {
+      font-family: 'Fira Code', monospace;
+      font-size: 1.0rem;
+      margin-top: 0.5rem;
+      max-width: 100%;
+      white-space: wrap;
+      overflow: hidden;
+    }
+
+    .typewriter-text {
+      display: inline;
+      border-right: 2px solid #fff;
+      animation: blink 0.7s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { border-color: transparent; }
+      50% { border-color: white; }
+    }
+
+    .contacts {
+      margin-top: 2rem;
+    }
+
+    .contacts a {
+      display: block;
+      color: #aaa;
+      text-decoration: none;
+      margin-bottom: 0.5rem;
+      transition: color 0.3s;
+    }
+
+    .contacts a:hover {
+      color: #fff;
+    }
+
+    .footer {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      font-size: 1.0rem;
+      color: #666;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .circle {
+      width: 10px;
+      height: 10px;
+      border: 2px solid #666;
+      border-radius: 50%;
+      border-top: 2px solid transparent;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+      }
+      .hamburger {
+        display: flex;
+      }
+      .mobile-nav {
+        display: flex;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="hamburger" onclick="toggleMenu()">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+
+  <nav>
+    <a href="#" data-tooltip="This is where you are">Home</a>
+    <a href="#" data-tooltip="Meet the vibe behind the screen">About</a>
+    <a href="#" data-tooltip="Projects I probably didn’t finish">Projects</a>
+    <a href="#" data-tooltip="Let’s make it awkward">Contact</a>
+  </nav>
+
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#">Home</a>
+    <a href="#">About</a>
+    <a href="#">Projects</a>
+    <a href="#">Contact</a>
+  </div>
+
+  <div class="main-content">
+    <div class="left">
+      <h1>Hey, I'm Bilal</h1>
+      <h2>I don’t code. I just vibe...&</h2>
+      <div class="typewriter-container">
+        <span id="typewriter" class="typewriter-text"></span>
+      </div>
+      <div class="contacts">
+        <a href="mailto:itsali.bilal@gmail.com" target="_blank">📧 itsali.bilal@gmail.com</a>
+        <a href="tel:+919340848088" target="_blank">📞 +91 9340848088</a>
+        <a href="https://github.com/Bilal0Ali" target="_blank">💻 GitHub</a>
+        <a href="https://www.linkedin.com/in/bilal-ali-jmi" target="_blank">💼 LinkedIn</a>
+      </div>
+    </div>
+
+    <div class="right">
+<img src="1010.jpg" alt="My Photo">
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>Other times, you can find me running in circles as fast as I can.</span>
+    <div class="circle"></div>
+  </div>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("mobileNav").classList.toggle("active");
+    }
+
+    const phrases = [
+      "occasionally try to debug inflation.",
+      "run regressions on my life choices.",
+      "accidentally model demand curves.",
+      "yell 'ceteris paribus' at my CSS.",
+      "hope my projects reach equilibrium.",
+      "treat bugs like market distortions.",
+      "wait for my creativity to reach full employment.",
+      "blame my bugs on invisible hands.",
+      "price my time like it’s perfectly inelastic.",
+      "apply Keynesian logic to my sleep schedule.",
+      "hit diminishing returns after 2 cups of chai.",
+      "optimize leisure like a true rational agent.",
+      "treat procrastination as an externality.",
+      "believe supply and demand apply to vibes too.",
+      "set unrealistic expectations like central banks.",
+      "forecast fun with zero margin of error.",
+      "treat my CSS like post-crisis monetary policy.",
+      "binge YouTube and call it behavioral economics."
+    ];
+
+    let i = 0;
+    let j = 0;
+    let currentPhrase = [];
+    let isDeleting = false;
+    let isEnd = false;
+    const typewriter = document.getElementById('typewriter');
+
+    function loop() {
+      isEnd = false;
+      typewriter.innerHTML = currentPhrase.join('');
+
+      if (i < phrases.length) {
+        if (!isDeleting && j <= phrases[i].length) {
+          currentPhrase.push(phrases[i][j]);
+          j++;
+          typewriter.innerHTML = currentPhrase.join('');
+        }
+
+        if (isDeleting && j >= 0) {
+          currentPhrase.pop();
+          j--;
+          typewriter.innerHTML = currentPhrase.join('');
+        }
+
+        if (!isDeleting && j === phrases[i].length) {
+          isEnd = true;
+          isDeleting = true;
+        }
+
+        if (isDeleting && j === 0) {
+          currentPhrase = [];
+          isDeleting = false;
+          i++;
+          if (i === phrases.length) {
+            i = 0;
+          }
+        }
+      }
+
+      const speed = isEnd ? 1500 : isDeleting ? 50 : 100;
+      setTimeout(loop, speed);
+    }
+
+    loop();
+  </script>
+</body>
+</html>
