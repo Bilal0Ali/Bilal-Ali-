@@ -7,7 +7,29 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');
+:root {
+      --bg-color: #fff;
+      --text-color: #111;
+      --border-color: #444;
+      --nav-bg: #fff;
+      --hover-color: #000;
 
+      --h1-color-dark: #ffffff;
+      --h2-color-dark: #cccccc;
+      --body-color-dark: #888888;
+    }
+
+    [data-theme="dark"] {
+      --bg-color: #111;
+      --text-color: #888888;
+      --border-color: #666;
+      --nav-bg: #111;
+      --hover-color: #fff;
+    }
+
+    * {
+      transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    }
     body {
       margin: 0;
       padding: 0;
@@ -111,12 +133,14 @@
       font-family: 'Cormorant Garamond', serif;
       font-size: 4.2rem;
       margin-bottom: 1rem;
+      color: var(--h1-color-dark);
     }
 
     h2 {
       font-family: 'playfair display', serif;
       font-size: 2.2rem;
       margin: 0;
+       color: var(--h2-color-dark);
     }
 
     .typewriter-container {
@@ -126,6 +150,7 @@
       max-width: 100%;
       white-space: wrap;
       overflow: hidden;
+      color: var(--body-color-dark);
     }
 
     .typewriter-text {
