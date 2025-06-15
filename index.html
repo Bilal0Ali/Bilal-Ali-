@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bilal's Vibe</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+
+    :root {
+      --h1-color-dark: #ffffff;
+      --h2-color-dark: #cccccc;
+      --body-color-dark: #888888;
+    }
+
+    [data-theme="dark"] {
+      --bg-color: #111;
+      --text-color: #888888;
+      --border-color: #666;
+      --nav-bg: transparent;
+      --hover-color: #fff;
+    }
+
+    * {
+      transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg-color);
+      color: var(--text-color);
+      font-family: 'Courier New', monospace;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .background-img {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      background: url('https://i.postimg.cc/9QMRj9F7/1010.jpg') no-repeat center center;
+      background-size: cover;
+      opacity: 0.15;
+      filter: grayscale(100%);
+    }
+
+    nav {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      padding: 1rem;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 900;
+      background: transparent !important;
+    }
+
+    nav a {
+      position: relative;
+      padding: 0.6rem 1.2rem;
+      color: var(--text-color);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--hover-color);
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    nav a:hover {
+      color: var(--hover-color);
+      transform: scale(1.1);
+    }
+
+    .main-content {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-start;
+      padding-top: 5rem;
+      padding-left: 5vw;
+      padding-right: 5vw;
+      gap: 2rem;
+    }
+
+    .left {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .right {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-width: 300px;
+      margin-top: 0;
+    }
+
+    .right img {
+      display: none;
+    }
+
+    h1, h2 {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1s ease forwards;
+    }
+
+    h2 {
+      animation-delay: 0.3s;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      color: var(--h1-color-dark);
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      margin: 0;
+      color: var(--h2-color-dark);
+    }
+
+    .typewriter-container {
+      font-family: 'Fira Code', monospace;
+      font-size: 1.0rem;
+      margin-top: 0.5rem;
+      max-width: 100%;
+      white-space: wrap;
+      overflow: hidden;
+      color: var(--body-color-dark);
+    }
+
+    .typewriter-text {
+      display: inline-block;
+      border-right: 2px solid var(--text-color);
+      animation: fadeIn 0.6s ease forwards, blink 0.7s infinite;
+      letter-spacing: 0.5px;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    @keyframes blink {
+      0%, 100% { border-color: transparent; }
+      50% { border-color: var(--text-color); }
+    }
+
+    .cta-button {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      border: 2px solid var(--border-color);
+      color: var(--text-color);
+      text-decoration: none;
+      border-radius: 999px;
+      transition: all 0.3s ease, transform 0.3s ease;
+      animation: pulse 2s infinite;
+    }
+
+    .cta-button:hover {
+      color: var(--hover-color);
+      border-color: var(--hover-color);
+      transform: scale(1.1);
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="background-img"></div>
+
+  <nav>
+    <a href="#">Home</a>
+    <a href="#" target="_blank">About</a>
+    <a href="#" target="_blank">Projects</a>
+  </nav>
+
+  <div class="main-content">
+    <div class="left">
+      <h1>Hey, I'm Bilal</h1>
+      <h2>I don’t code. I just vibe...<br>&</h2>
+      <div class="typewriter-container">
+        <span id="typewriter" class="typewriter-text"></span>
+      </div>
+      <a class="cta-button" href="contact.html" target="_blank">Contact Me</a>
+    </div>
+    <div class="right">
+      <img src="https://i.postimg.cc/9QMRj9F7/1010.jpg" alt="My Photo">
+    </div>
+  </div>
+
+  <audio id="type-sound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_1b56606a19.mp3?filename=typewriter-2-185920.mp3"></audio>
+
+  <script>
+    const phrases = [
+      "hope my projects reach equilibrium.",
+      "call my indecisiveness a mixed economy.",
+      "assume away my problems like economists do.",
+      "binge YouTube and call it behavioral economics.",
+      "label every crisis a 'market correction'.",
+      "plot my mood swings on a Phillips Curve.",
+      "calculate opportunity cost before dating.",
+      "try to quantify love with utility functions.",
+      "measure my heartbreak in basis points.",
+      "treat social life as a zero-sum game.",
+      "model friendships as perfectly competitive markets.",
+      "treat bugs like market distortions.",
+      "wait for my creativity to reach full employment."
+    ];
+
+    let i = 0;
+    let j = 0;
+    let currentPhrase = [];
+    let isDeleting = false;
+    let isEnd = false;
+    const typewriter = document.getElementById('typewriter');
+    const typeSound = document.getElementById('type-sound');
+
+    function playTypingSound() {
+      typeSound.currentTime = 0;
+      typeSound.play();
+    }
+
+    function loop() {
+      isEnd = false;
+      typewriter.innerHTML = currentPhrase.join('');
+
+      if (i < phrases.length) {
+        if (!isDeleting && j <= phrases[i].length) {
+          currentPhrase.push(phrases[i][j]);
+          j++;
+          typewriter.innerHTML = currentPhrase.join('');
+          playTypingSound();
+        }
+
+        if (isDeleting && j >= 0) {
+          currentPhrase.pop();
+          j--;
+          typewriter.innerHTML = currentPhrase.join('');
+        }
+
+        if (!isDeleting && j === phrases[i].length) {
+          isEnd = true;
+          isDeleting = true;
+        }
+
+        if (isDeleting && j === 0) {
+          currentPhrase = [];
+          isDeleting = false;
+          i++;
+          if (i === phrases.length) {
+            i = 0;
+          }
+        }
+      }
+
+      const speed = isEnd ? 1800 : isDeleting ? 40 : 85;
+      setTimeout(loop, speed);
+    }
+
+    loop();
+  </script>
+</body>
+</html>
